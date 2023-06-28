@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
 
-function App() {
+import React, { useEffect, useState } from "react";
+import MyFriends from "./components/page/MyFriends";
+import NoMatch from "./components/NoMatch";
+import Profile from "./components/page/Profile";
+import Home from "./components/page/Home";
+import axios from "axios";
+
+const App = () => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://dummyjson.com/users")
+      .then((res) => {
+        setPosts(res.data.users);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Home posts={posts} />} />
+        <Route path="my-friends" element={<MyFriends posts={posts} />} />
+        <Route path="my-friends/:id" element={<Profile posts={posts} />} />
+        <Route path="*" element={<NoMatch />} />
+      </Routes>
+    </>
   );
-}
+};
 
 export default App;

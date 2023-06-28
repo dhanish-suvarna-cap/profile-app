@@ -1,38 +1,80 @@
-.App {
-  text-align: center;
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background: rgb(229, 155, 180);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.card{
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
+  box-shadow: 0px 3px 15px 1px #000000;
+  width: 500px;
+  height: 500px;
+  margin: auto;
+  margin-top: 40px;
+  background: whitesmoke;
+}
+
+.nav-container {
+  margin-top: 30px;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.my-frnd-link {
+  color: whitesmoke;
+  text-decoration: none;
+  text-align: center;
+  background-color: rgb(192, 0, 160);
+  padding: 12px 18px;
+  border-radius: 30px;
+  font-size: large;
+  font-weight: 600;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.my-frnd-link:hover {
+  background: whitesmoke;
+  color:  rgb(192, 0, 160);
+  border: 2px solid rgb(192, 0, 160);
+}
+
+.list-wrapper{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.frnds-list{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  list-style: none;
+  box-shadow: 0px 3px 15px 1px #000000;
+  margin: 20px 50px 50px;
+  height: 120px;
+  width: 350px;
+  padding: 0 20px 0 0;
+  border-radius: 40px;
+  background: whitesmoke;
+}
+
+.frnds-list a {
+  color: #000000;
+  text-decoration: none;
+  font-size: large;
+  font-weight: 800;
+}
+
+.list-img{
+  width: 140px;
+  height: 180px;
+  margin-bottom: 60px;
 }
