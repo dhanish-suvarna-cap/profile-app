@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import MyProfile from "../MyProfile";
 
 const Home = ({ posts }) => {
-  const myData = posts[0];
+  const myData = posts.data[0];
   return (
     <>
       <MyProfile post={myData} />

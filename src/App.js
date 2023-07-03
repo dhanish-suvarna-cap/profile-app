@@ -1,37 +1,47 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import MyFriends from "./components/page/MyFriends";
 import NoMatch from "./components/NoMatch";
 import Profile from "./components/page/Profile";
 import Home from "./components/page/Home";
-import axios from "axios";
+import { connect } from "react-redux";
+import { getUsersRequest } from "./components/redux";
 
-const App = () => {
-  const [posts, setPosts] = useState([]);
-
+const App = ({ users, getUsers }) => {
   useEffect(() => {
-    axios
-      .get("https://dummyjson.com/users")
-      .then((res) => {
-        setPosts(res.data.users);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    getUsers();
+  }, [getUsers]);
 
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home posts={posts} />} />
-        <Route path="my-friends" element={<MyFriends posts={posts} />} />
-        <Route path="my-friends/:id" element={<Profile posts={posts} />} />
-        <Route path="*" element={<NoMatch />} />
-      </Routes>
+      {users.loading ? (
+        <h1>Loading...</h1>
+      ) : users.data.length > 0 ? (
+        <Routes>
+          <Route path="/" element={<Home posts={users} />} />
+          <Route path="my-friends" element={<MyFriends posts={users} />} />
+          <Route path="my-friends/:id" element={<Profile posts={users} />} />
+          <Route path="*" element={<NoMatch />} />
+        </Routes>
+      ) : (
+        <h3>{users.error}</h3>
+      )}
     </>
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    users: state.users,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUsers: () => dispatch(getUsersRequest()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

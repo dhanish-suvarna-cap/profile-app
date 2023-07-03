@@ -4,7 +4,7 @@ import Card from "../Card";
 
 const Profile = ({ posts }) => {
   const { id } = useParams();
-  let post = posts.filter((post) => post.id === parseInt(id));
+  let post = posts.data.filter((post) => post.id === parseInt(id));
 
   return <>{post.length > 0 && <Card post={post[0]} />}</>;
 };

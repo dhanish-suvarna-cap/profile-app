@@ -4,7 +4,7 @@ const MyFriends = ({ posts }) => {
   return (
     <>
       <ul className="list-wrapper">
-        {posts.map((post) => {
+        {posts.data.map((post) => {
           return <ListCard key={post.id} post={post} />;
         })}
       </ul>
